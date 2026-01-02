@@ -12,14 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MainController extends AbstractController
 {
-    public function homepage(EntityManagerInterface $em): Response
+    public function homepage(ArticleRepository $articleRepository): Response
     {
-        $articles = $em->createQueryBuilder()
-            ->select('a')
-            ->from(Article::class, 'a')
-            ->getQuery()
-            ->getResult()
-        ;
+        $articles = $articleRepository->findCompleteArticles(false);
+//        $articles = $articleRepository->findMyArticle();
 
         return $this->render('articles/index.html.twig', [
             'articles' => $articles,

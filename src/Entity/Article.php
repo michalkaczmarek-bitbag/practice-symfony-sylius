@@ -20,6 +20,9 @@ class Article
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
+    #[ORM\Column]
+    private ?bool $isCompleted = null;
+
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $published = null;
 
@@ -62,5 +65,15 @@ class Article
         $this->published = $published;
 
         return $this;
+    }
+
+    public function getIsCompleted(): ?bool
+    {
+        return $this->isCompleted;
+    }
+
+    public function setIsCompleted(?bool $isCompleted): void
+    {
+        $this->isCompleted = $isCompleted;
     }
 }

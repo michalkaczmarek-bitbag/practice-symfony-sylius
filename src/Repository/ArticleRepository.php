@@ -16,6 +16,29 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findCompleteArticles(bool $value): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.isCompleted = :isCompleted')
+            ->setParameter('isCompleted', $value)
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Article
+     */
+    public function findMyArticle(): Article
+    {
+        return $this->findAll()[0];
+    }
+
     //    /**
     //     * @return Article[] Returns an array of Article objects
     //     */
