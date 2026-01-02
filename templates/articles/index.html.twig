@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for article in articles %}
+        <span>Id</span>
+        <span>{{ article.id }} || </span>
+        <span>Title</span>
+        <span>{{ article.title }} || </span>
+        <span>Content:</span>
+        <span>{{ article.content }} || </span>
+        <span>Published</span>
+        <span>{{ article.published|date }} || </span>
+        <a href="{{ path('app_show', {'id': article.id}) }}">read</a>
+        <p>'###########################################'</p>
+    {% endfor %}
+{% endblock %}
