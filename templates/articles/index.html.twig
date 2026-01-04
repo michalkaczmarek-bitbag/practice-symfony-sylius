@@ -1,6 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <p>{{ articles.nbResults }} articles (Page {{ articles.currentPage }} of {{ articles.nbPages }})</p>
+    {% if articles.haveToPaginate %}
+        <div class="flex justify-around mt-3 underline font-semibold">
+            {% if articles.hasPreviousPage %}
+                <a href="{{ path('app_homepage', {page: articles.getPreviousPage}) }}">&lt; Previous</a>
+            {% endif %}
+            {% if articles.hasNextPage %}
+                <a href="{{ path('app_homepage', {page: articles.getNextPage}) }}">Next &gt;</a>
+            {% endif %}
+        </div>
+    {% endif %}
     {% for article in articles %}
         <span>Id</span>
         <span>{{ article.id }} || </span>

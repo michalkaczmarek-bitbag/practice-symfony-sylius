@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 
 /**
  * @extends ServiceEntityRepository<Article>
@@ -18,17 +20,17 @@ class ArticleRepository extends ServiceEntityRepository
 
 
     /**
-     * @return Article[] Returns an array of Article objects
+     * @return Pagerfanta
      */
-    public function findCompleteArticles(bool $value): array
+    public function findCompleteArticles(bool $value): Pagerfanta
     {
-        return $this->createQueryBuilder('a')
+        $query =  $this->createQueryBuilder('a')
             ->andWhere('a.isCompleted = :isCompleted')
             ->setParameter('isCompleted', $value)
             ->orderBy('a.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
+            ->getQuery();
+
+        return new Pagerfanta(new QueryAdapter($query));
     }
 
     /**

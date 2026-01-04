@@ -8,13 +8,17 @@ use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class MainController extends AbstractController
 {
-    public function homepage(ArticleRepository $articleRepository): Response
+    public function homepage(ArticleRepository $articleRepository, Request $request): Response
     {
         $articles = $articleRepository->findCompleteArticles(false);
+        $articles->setMaxPerPage(5);
+        $articles->setCurrentPage((int)$request->query->get('page', 1));
+//        $articles = $articleRepository->findCompleteArticles(false);
 //        $articles = $articleRepository->findMyArticle();
 
         return $this->render('articles/index.html.twig', [

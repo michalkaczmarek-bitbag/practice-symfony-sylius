@@ -7,10 +7,12 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "babdev/pagerfanta-bundle": "^4.6",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.18",
         "doctrine/doctrine-migrations-bundle": "^3.7",
         "doctrine/orm": "^3.6",
+        "pagerfanta/doctrine-orm-adapter": "^4.7",
         "symfony/console": "7.4.*",
         "symfony/dotenv": "7.4.*",
         "symfony/flex": "^2",
@@ -76,6 +78,7 @@
         "doctrine/doctrine-fixtures-bundle": "^4.3",
         "symfony/maker-bundle": "^1.65",
         "symfony/stopwatch": "7.4.*",
-        "symfony/web-profiler-bundle": "7.4.*"
+        "symfony/web-profiler-bundle": "7.4.*",
+        "zenstruck/foundry": "^2.8"
     }
 }
